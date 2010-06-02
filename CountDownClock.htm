@@ -71,7 +71,7 @@ div#play div#timeLeft {
 			<span id="errorStart" class="error"></span>
 			<p>Start Time: <input type=text id="Mins" size="2" value="5">mins:<input type=text id="Secs" size="2" value="00">secs</p>
 		</fieldset>
-		<p><input style="font-size: 200%; padding: 10px" value="Start The Clock" type=submit onclick="startMatch(); return false;"></p>
+		<p><input style="font-size: 200%; padding: 10px" value="Start The Clock" type=submit onclick="startMatch(); return false;" id="StartButton"></p>
 	</form>
 </div>
 
@@ -97,6 +97,7 @@ function init() {
 	document.getElementById('start').style.display = 'block';
 	document.getElementById('nojs').style.display = 'none';
         document.getElementById('play').style.display = 'none';
+	document.getElementById('StartButton').focus();
 	clockStarted = false;
 	clockRunning = false;
 }
@@ -124,6 +125,7 @@ function startMatch() {
 	update();
 	document.getElementById('start').style.display = 'none';
 	document.getElementById('play').style.display = 'block';
+	document.getElementById('ReturnToMenuLinkFromGameButton').focus();
 	setInterval("update()",200);
 
 }
