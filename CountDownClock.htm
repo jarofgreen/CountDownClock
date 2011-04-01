@@ -107,7 +107,12 @@ function setError(id,message) {
 	document.getElementById(id).style.display = 'block';
 }
 
+function hideError(id) {
+	document.getElementById(id).style.display = 'none';
+}
+
 function startMatch() {
+	hideError('errorStart');
 	// calculate start time
 	var time = Math.max(0,parseInt(document.getElementById('Mins').value))*60
 		+ Math.max(0,parseInt(document.getElementById('Secs').value));
