@@ -1,6 +1,6 @@
 <html>
 <!--
-Copyright (C) 2010 James (james at doubtlesshouse dot org dot uk)
+Copyright (C) 2010,2011 James (james at jarofgreen dot co dot uk)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -136,24 +136,26 @@ function startMatch() {
 function update() {
 	var now = new Date();
 	var time = timeToGive*1000 - (now.getTime() - clockStarted.getTime());
-	if (time < 0) {
-		clockRunning = false;
-		stopTimer();
-	}	
+	if (time > 0) {
+		document.getElementById('timeLeft').style.color = 'black';
+	} else {
+		document.getElementById('timeLeft').style.color = 'red';
+	}
 	document.getElementById('timeLeft').innerHTML = renderTime(time);
 }
 
 function renderTime(milliseconds) {
-	if (milliseconds < 1) { return '0'; }
 	var seconds = parseInt(milliseconds / 1000);
 	if (seconds >= 60*60) {
 		return parseInt(seconds / (60*60))+":"+zeropad((seconds / 60)%60)+":"+zeropad(seconds%60);
 	} else if ( seconds >= 60) {
 		return parseInt(seconds / 60)+":"+zeropad(seconds%60);
-	} else {
-		return parseInt(seconds);
+	} else if ( seconds <= -60*60) {
+		return parseInt(seconds / (60*60))+":"+zeropad((seconds*-1 / 60)%60)+":"+zeropad((seconds*-1)%60);
+	} else if ( seconds <= -60) {
+		return parseInt(seconds / 60)+":"+zeropad((seconds*-1)%60);
 	}
-	return out;
+	return parseInt(seconds);
 }
 function zeropad(innum) {
 	if (innum < 10) { return "0"+parseInt(innum); } else { return parseInt(innum); }
